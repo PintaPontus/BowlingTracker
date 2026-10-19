@@ -1,0 +1,7 @@
+TEAM_ID=
+
+PRODUCT_NAME=BowlingTracker
+PRODUCT_BUNDLE_IDENTIFIER=com.pintapontus.bowlingtracker.BowlingTracker$(TEAM_ID)
+
+CURRENT_PROJECT_VERSION=1
+MARKETING_VERSION=1.0
