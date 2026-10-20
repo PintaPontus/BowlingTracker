@@ -3,26 +3,27 @@ import SharedLogic
 
 struct ContentView: View {
     @State private var showContent = false
+    @State private var frames: [Frame] = []
+    private let store = IosFrameStore()
+
     var body: some View {
         VStack {
-            Button("Click me!") {
-                withAnimation {
-                    showContent = !showContent
-                }
+            // ... existing code ...
+
+            Button("Aggiungi frame") {
+                store.insert(title: "Frame", content: "Test")
             }
 
-            if showContent {
-                VStack(spacing: 16) {
-                    Image(systemName: "swift")
-                        .font(.system(size: 200))
-                        .foregroundColor(.accentColor)
-                    Text("SwiftUI: \(Greeting().greet())")
-                }
-                .transition(.move(edge: .top).combined(with: .opacity))
+            List(frames, id: \.id) { frame in
+                Text(frame.title)
             }
         }
-        .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
-        .padding()
+        // ... existing code ...
+        .onAppear {
+            store.observe { newFrames in
+                frames = newFrames
+            }
+        }
     }
 }
 

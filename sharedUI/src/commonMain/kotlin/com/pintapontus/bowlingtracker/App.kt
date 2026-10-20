@@ -14,14 +14,17 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import org.jetbrains.compose.resources.painterResource
-
 import bowlingtracker.sharedui.generated.resources.Res
 import bowlingtracker.sharedui.generated.resources.compose_multiplatform
+import com.pintapontus.bowlingtracker.data.Frame
+import com.pintapontus.bowlingtracker.data.repository.FrameRepository
+import kotlinx.coroutines.runBlocking
+import org.jetbrains.compose.resources.painterResource
 
 @Composable
 @Preview
-fun App() {
+fun App(frameRepo: FrameRepository? = null) {
+
     MaterialTheme {
         var showContent by remember { mutableStateOf(false) }
         Column(
@@ -31,17 +34,23 @@ fun App() {
                 .fillMaxSize(),
             horizontalAlignment = Alignment.CenterHorizontally,
         ) {
-            Button(onClick = { showContent = !showContent }) {
+            Button(onClick = {
+                showContent = !showContent
+                runBlocking {
+                    frameRepo?.insert(Frame(0, "title", "content"))
+                }
+            }) {
                 Text("Click me!")
             }
             AnimatedVisibility(showContent) {
-                val greeting = remember { Greeting().greet() }
+                val frames by (frameRepo?.allNotes ?: kotlinx.coroutines.flow.flowOf(emptyList()))
+                    .collectAsState(initial = emptyList())
                 Column(
                     modifier = Modifier.fillMaxWidth(),
                     horizontalAlignment = Alignment.CenterHorizontally,
                 ) {
                     Image(painterResource(Res.drawable.compose_multiplatform), null)
-                    Text("Compose: $greeting")
+                    Text("Frames: $frames")
                 }
             }
         }
