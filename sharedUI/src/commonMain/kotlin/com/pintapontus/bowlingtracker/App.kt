@@ -16,7 +16,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import bowlingtracker.sharedui.generated.resources.Res
 import bowlingtracker.sharedui.generated.resources.compose_multiplatform
-import com.pintapontus.bowlingtracker.data.Frame
+import com.pintapontus.bowlingtracker.data.entity.Frame
 import com.pintapontus.bowlingtracker.data.repository.FrameRepository
 import kotlinx.coroutines.runBlocking
 import org.jetbrains.compose.resources.painterResource

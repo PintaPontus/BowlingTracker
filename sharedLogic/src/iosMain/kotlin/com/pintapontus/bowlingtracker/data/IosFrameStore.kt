@@ -1,5 +1,6 @@
 package com.pintapontus.bowlingtracker.data
 
+import com.pintapontus.bowlingtracker.data.entity.Frame
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach

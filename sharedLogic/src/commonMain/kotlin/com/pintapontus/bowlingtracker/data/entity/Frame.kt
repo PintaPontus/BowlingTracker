@@ -1,4 +1,4 @@
-package com.pintapontus.bowlingtracker.data
+package com.pintapontus.bowlingtracker.data.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
